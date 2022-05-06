@@ -18,6 +18,7 @@ $ pip install -r requirements.txt
 ```bash
 $ python letreco.py
 ```
+---
 No **Termo** você deve acertar uma palavra em **6** tentativas. No **Dueto** são duas palavras em **7** tentativas.
 
 A palavra sempre terá 5 letras, e será gerada de forma aleatória a partir de uma lista pré-estabelecida.
