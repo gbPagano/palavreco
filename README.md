@@ -1,16 +1,13 @@
 # Wordle Game for Terminal
 ## Introdução
----
 ### Este é um jogo para terminal baseado no [Wordle][link-wordle], [Termo][link-termo] e [Letreco][link-letreco].
 > O programa e o código fonte estão em português
 ## Requisitos
----
 * Ter o Python instalado na versão 3.10.4 (durante o desenvolvimento, utilizei a versão 3.10.4, então não garanto que versões anteriores funcionem);
     * Ter as seguintes bibliotecas no Python:
         * Unidecode==1.3.4
 * O programa não funciona bem no Windows 7 ou inferior.
 ## Como utilizar
----
 ### Instalando as bibliotecas necessárias
 ```bash
 $ git clone https://github.com/gbPagano/wordle-game-for-terminal
@@ -49,7 +46,6 @@ Exemplo no modo dueto:
 
 ![dueto](./assets/dueto.png)
 ## Como funciona
----
 As palavras selecionadas para as partidas foram escolhidas manualmente por mim e colocadas em uma lista no python. A cada início de partida uma nova palavra é escolhida aleatoriamente a partir dessa lista.
 
 Para verificar se a palavra existe ou não, filtrei uma lista publica de palavras que pode ser encontrada [aqui][link-palavras], e coloquei essas palavras em um dicionário no python, com cada palavra acentuada e desacentuada.
