@@ -7,7 +7,10 @@ from dicionario import dicionario
 def main():
     ligar = True
     while ligar:
-        os.system("cls")    
+        if os.name == 'nt':
+            os.system("cls")
+        else:
+            os.system("clear")    
         print("┌","─"*9,"┐""\n│ Letreco │\n└","─"*9,"┘\n",sep= "")
         continuar = True
         print("Para \033[033maprender\033[m a jogar, digite \033[033m0\033[m")
@@ -16,7 +19,10 @@ def main():
             jogo = input("O que deseja jogar: ")
             if jogo not in "123" or len(jogo) != 1:
                 while jogo not in "012" or len(jogo) != 1:
-                    os.system("cls")
+                    if os.name == 'nt':
+                        os.system("cls")
+                    else:
+                        os.system("clear")
                     print("\033[33mPor favor digite uma opção disponível.\033[m\n")
                     print("Para \033[033maprender\033[m a jogar, digite \033[033m0\033[m")
                     print("Para jogar \033[032mTermo\033[m, digite \033[032m1\033[m\nPara jogar \033[031mDueto\033[m, digite \033[031m2\033[m\n")
@@ -24,20 +30,35 @@ def main():
             if jogo == "1":
                 if termo():
                     continuar = True
-                    os.system("cls")
+                    if os.name == 'nt':
+                        os.system("cls")
+                    else:
+                        os.system("clear")
                 else:
                     continuar = False
-                    os.system("cls")
+                    if os.name == 'nt':
+                        os.system("cls")
+                    else:
+                        os.system("clear")
             elif jogo == "2":
                 if dueto():
                     continuar = True
-                    os.system("cls")
+                    if os.name == 'nt':
+                        os.system("cls")
+                    else:
+                        os.system("clear")
                 else:
                     continuar = False
-                    os.system("cls")
+                    if os.name == 'nt':
+                        os.system("cls")
+                    else:
+                        os.system("clear")
             else:
                 regras()
-                os.system("cls")
+                if os.name == 'nt':
+                    os.system("cls")
+                else:
+                    os.system("clear")
         
         print("fim")
         ligar = False
@@ -45,7 +66,10 @@ def main():
 def termo():
     ligar = True
     while ligar:
-        os.system("cls")    
+        if os.name == 'nt':
+            os.system("cls")
+        else:
+            os.system("clear")    
         print("\033[032m┌","─"*7,"┐""\n│\033[m \033[032mTermo\033[m \033[032m│\n└","─"*7,"┘\033[m",sep= "")
         palavra = choice(palavras)
         palavra_sem_acentos = unidecode(palavra)
@@ -74,7 +98,10 @@ def termo():
         continuar =  input("Deseja continuar jogando? (\033[032ms\033[m/\033[031mn\033[m): ")
         if continuar not in "sn" or len(continuar) != 1:
             while continuar not in "sn" or len(continuar) != 1:
-                os.system("cls")
+                if os.name == 'nt':
+                    os.system("cls")
+                else:
+                    os.system("clear")
                 print("\033[33mPor favor digite uma opção disponível.\033[m\n")
                 continuar =  input("Deseja continuar jogando? (\033[032ms\033[m/\033[031mn\033[m): ")
         if continuar == "s":
@@ -125,7 +152,10 @@ def comparar_palavra(tentativa, palavra, tentativa_com_acentos, c, t,vidas):
         elif tentativa[i] != palavra[i] and tentativa[i] in palavra:
             resultado[i] = "\033[31m{} \033[m".format(tentativa_com_acentos[i])
                     
-    os.system("cls")
+    if os.name == 'nt':
+        os.system("cls")
+    else:
+        os.system("clear")
     for i in range(5):
         t[c].append(resultado[i])
     for i in range (c+1):
@@ -140,7 +170,10 @@ def comparar_palavra(tentativa, palavra, tentativa_com_acentos, c, t,vidas):
 def dueto():
     ligar = True
     while ligar:
-        os.system("cls")    
+        if os.name == 'nt':
+            os.system("cls")
+        else:
+            os.system("clear")    
         print("\033[031m┌","─"*7,"┐""\n│\033[m \033[031mDueto\033[m \033[031m│\n└","─"*7,"┘\033[m",sep= "")
         palavra = choice(palavras)
         palavra2 = choice(palavras)
@@ -177,7 +210,10 @@ def dueto():
         continuar =  input("Deseja continuar jogando? (\033[032ms\033[m/\033[031mn\033[m): ")
         if continuar not in "sn" or len(continuar) != 1:
             while continuar not in "sn" or len(continuar) != 1:
-                os.system("cls")
+                if os.name == 'nt':
+                    os.system("cls")
+                else:
+                    os.system("clear")
                 print("\033[033mPor favor digite uma opção disponível.\033[m\n")
                 continuar =  input("Deseja continuar jogando? (\033[032ms\033[m/\033[031mn\033[m): ")
         if continuar == "s":
@@ -250,7 +286,10 @@ def comparar_2palavras(tentativa, palavra,palavra2, tentativa_com_acentos, c, t,
         verificador2[0] = 1
         verificador2.append(c)
 
-    os.system("cls")
+    if os.name == 'nt':
+        os.system("cls")
+    else:
+        os.system("clear")
     for i in range(5):
         t[c].append(resultado[i])
         t2[c].append(resultado2[i])
@@ -263,7 +302,10 @@ def comparar_2palavras(tentativa, palavra,palavra2, tentativa_com_acentos, c, t,
         return True
 
 def regras():
-    os.system("cls")
+    if os.name == 'nt':
+        os.system("cls")
+    else:
+        os.system("clear")
     print("\033[033m┌","─"*12,"┐""\n│\033[m \033[033mComo Jogar\033[m \033[033m│\n└","─"*12,"┘\033[m\n",sep= "")
     print("\033[033m>\033[m No \033[032mTermo\033[m você deve acertar uma palavra em 6 tentativas. No \033[031mDueto\033[m são duas palavras em 7 tentativas.")
     print("\033[033m>\033[m A palavra sempre terá 5 letras, e será gerada de forma aleatória a partir de uma lista pré-estabelecida.")
