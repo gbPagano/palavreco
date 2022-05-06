@@ -21,7 +21,7 @@ $ python letreco.py
 ---
 No **Termo** você deve acertar uma palavra em **6** tentativas. No **Dueto** são duas palavras em **7** tentativas.
 
-A palavra sempre terá 5 letras, e será gerada de forma aleatória a partir de uma lista pré-estabelecida.
+A palavra sempre terá 5 letras, e será gerada de forma aleatória a partir de uma lista preestabelecida.
 
 Depois de cada tentativa, as letras recebem cores para mostrar o quão perto você está da solução.
 Somente palavras existentes são aceitas por tentativa.
