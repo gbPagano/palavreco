@@ -9,7 +9,7 @@
     * Ter as seguintes bibliotecas no Python:
         * Unidecode==1.3.4
 * O programa não funciona bem no Windows 7 ou inferior.
-## Como utilizar o programa
+## Como utilizar
 ---
 ### Instalando as bibliotecas necessárias
 ```bash
@@ -48,7 +48,7 @@ Exemplo no modo termo:
 Exemplo no modo dueto:
 
 ![dueto](./assets/dueto.png)
-## como funciona o programa
+## Como funciona
 ---
 As palavras selecionadas para as partidas foram escolhidas manualmente por mim e colocadas em uma lista no python. A cada início de partida uma nova palavra é escolhida aleatoriamente a partir dessa lista.
 
