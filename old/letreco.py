@@ -85,7 +85,7 @@ def termo():
                 print("\nVocê tem \033[31m{}\033[m tentativas restantes.\n".format(vidas))
             tentativa = receber_palavra().upper()
             tentativa_sem_acentos = unidecode(tentativa).lower()
-            if comparar_palavra (tentativa_sem_acentos, palavra_sem_acentos,tentativa, contador, todas, vidas):
+            if comparar_palavra(tentativa_sem_acentos, palavra_sem_acentos,tentativa, contador, todas, vidas):
                 vidas = 0
                 resultado = 1
             else:
