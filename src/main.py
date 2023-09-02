@@ -20,12 +20,12 @@ class LetterPosition(Enum):
     wrong = "red"
     correct = "green"
     almost = "yellow"
+    empty = ""
 
 
 class Termo():
     def __init__(self):
-        # self.random_word = self._get_random_word()
-        self.random_word = "areal"
+        self.console = Console()
 
     def _get_random_word(self) -> str:
         return random.choice(palavras)
@@ -39,8 +39,10 @@ class Termo():
             word = input("Digite uma palavra: ")
             if self._is_valid(word):
                 return word
+            elif len(word) != 5:
+                print("asda")
             else:
-                print("Palavra inválida!")
+                print("sdsad")
 
     def compare_words(self, word):
 
@@ -60,24 +62,66 @@ class Termo():
 
         return result
 
-    def is_correct(self, result):
-        return all(letter == LetterPosition.correct for letter in result)
+    def _get_accent_word(self, word):
+        return word
 
+ 
+    def get_game_result(self):
+        for _, result in self.board:
+            if all(letter == LetterPosition.correct for letter in result):
+                self.game_is_ended = True
+                self.result = True
+
+        if self.board[-1][0] != "_____":
+            self.game_is_ended = True
+            self.result = False
+
+
+    def print_board(self, border=""):
+        self.console.rule("TERMO")
+        text = Text()
+        for word, result in self.board:
+            accented_word = self._get_accent_word(word)
+            for idx in range(4):
+                text.append(f"{accented_word[idx]} ", style=result[idx].value)
+            text.append(f"{accented_word[4]}\n", style=result[idx].value)
+
+        self.console.print(Panel.fit(text, border_style=border), justify="center")
 
     def run(self):
-        tentatives = 6
-        while tentatives:
-            word = self.get_input_word()
-            result = self.compare_words(word)
-            print_result(word, result)
-            if self.is_correct(result):
-                break
-            tentatives -= 1
+        # self.random_word = self._get_random_word()
+        self.game_is_ended = False
+        self.result = None
+        self.random_word = "areal"
+        self.board = [("_____", [LetterPosition.empty]*5)] * 6
+
+        for move in range(6):
+            with self.console.screen():
+                self.print_board()
+
+                word = self.get_input_word()
+                result = self.compare_words(word)
+                self.board[move] = (word, result)
+
+                self.get_game_result()
+                if self.game_is_ended:
+                    break
+
+        with self.console.screen():
+            if self.result:
+                border = "green"
+            else:
+                border = "red"
+            self.print_board(border)
+            input()
+        
+
 
 
 class Letreco:
     def __init__(self):
         self.console = Console()
+        self.termo = Termo()
 
     def _gen_menu_group(self, index: int = 0) -> Group:
         menu = Text(justify="left")
@@ -175,17 +219,10 @@ class Letreco:
             match option:
                 case "tutorial":
                     self.tutorial_menu()
+                case "termo":
+                    self.termo.run()
 
 
-
-
-
-def print_result(word: str, result: list[LetterPosition]):
-    text = Text()
-    for idx in range(5):
-        text.append(word[idx], style=result[idx].value)
-
-    print(text)
 
 
 

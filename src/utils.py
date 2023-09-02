@@ -1,4 +1,5 @@
 from unicodedata import normalize
+from sys import exit
 
 import click
 
