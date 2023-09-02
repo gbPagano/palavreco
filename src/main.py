@@ -70,7 +70,9 @@ class Termo():
         for _, result in self.board:
             if all(letter == LetterPosition.correct for letter in result):
                 self.game_is_ended = True
-            self.result = False
+                self.result = True
+        
+        # self.result = False
 
 
     def print_board(self, border=""):
@@ -81,7 +83,7 @@ class Termo():
             for idx in range(4):
                 text.append(f"{accented_word[idx]} ", style=result[idx].value)
             text.append(f"{accented_word[4]}\n", style=result[idx].value)
-    
+        text.rstrip() 
         self.console.print(Panel.fit(text, border_style=border), justify="center")
 
     def new_game(self):
