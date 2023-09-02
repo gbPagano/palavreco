@@ -40,9 +40,9 @@ class Termo():
             if self._is_valid(word):
                 return word
             elif len(word) != 5:
-                print("asda")
+                self.console.print("Por favor digite uma palavra com 5 letras!", style="yellow")
             else:
-                print("sdsad")
+                self.console.print("Por favor digite uma palavra existente!", style="yellow")
 
     def compare_words(self, word):
 
@@ -50,13 +50,13 @@ class Termo():
         found_letters_counter = defaultdict(int)
 
         for idx in range(5):
-            if word[idx] == self.random_word[idx]:
+            if word[idx] == self.random_word_without_accents[idx]:
                 result[idx] = LetterPosition.correct
                 found_letters_counter[word[idx]] += 1
 
         for idx in range(5):
-            if word[idx] in self.random_word and result[idx] != LetterPosition.correct:
-                if found_letters_counter[word[idx]] < self.random_word.count(word[idx]):
+            if word[idx] in self.random_word_without_accents and result[idx] != LetterPosition.correct:
+                if found_letters_counter[word[idx]] < self.random_word_without_accents.count(word[idx]):
                     result[idx] = LetterPosition.almost
                     found_letters_counter[word[idx]] += 1
 
@@ -70,10 +70,6 @@ class Termo():
         for _, result in self.board:
             if all(letter == LetterPosition.correct for letter in result):
                 self.game_is_ended = True
-                self.result = True
-
-        if self.board[-1][0] != "_____":
-            self.game_is_ended = True
             self.result = False
 
 
@@ -85,15 +81,32 @@ class Termo():
             for idx in range(4):
                 text.append(f"{accented_word[idx]} ", style=result[idx].value)
             text.append(f"{accented_word[4]}\n", style=result[idx].value)
-
+    
         self.console.print(Panel.fit(text, border_style=border), justify="center")
 
-    def run(self):
-        # self.random_word = self._get_random_word()
+    def new_game(self):
+        # self.random_word_without_accents = self._get_random_word()
+        self.random_word = "areal"
+        self.random_word_without_accents = "areal"
         self.game_is_ended = False
         self.result = None
-        self.random_word = "areal"
         self.board = [("_____", [LetterPosition.empty]*5)] * 6
+
+    def final(self):
+        with self.console.screen():
+            if self.result:
+                final_txt = Text("Parabéns você ganhou! A palavra era: ")
+                border = "green"
+            else:
+                final_txt = Text("Que pena, você perdeu. A palavra era: ")
+                border = "red"
+            final_txt.append(Text(self.random_word, style="green"))
+            self.print_board(border)
+            self.console.print(final_txt)
+            input()
+
+    def run(self):
+        self.new_game()
 
         for move in range(6):
             with self.console.screen():
@@ -107,21 +120,16 @@ class Termo():
                 if self.game_is_ended:
                     break
 
-        with self.console.screen():
-            if self.result:
-                border = "green"
-            else:
-                border = "red"
-            self.print_board(border)
-            input()
-        
+        self.final()
 
 
+          
 
 class Letreco:
     def __init__(self):
         self.console = Console()
         self.termo = Termo()
+        # self.dueto = Dueto()
 
     def _gen_menu_group(self, index: int = 0) -> Group:
         menu = Text(justify="left")
@@ -221,6 +229,9 @@ class Letreco:
                     self.tutorial_menu()
                 case "termo":
                     self.termo.run()
+                case "dueto":
+                    # self.dueto.run()
+                    ...
 
 
 
