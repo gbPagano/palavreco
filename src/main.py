@@ -14,115 +14,8 @@ from rich.traceback import install; install()
 from palavras import palavras
 from dicionario import dicionario
 from utils import remove_accents, get_click
-
-
-class LetterPosition(Enum):
-    wrong = "red"
-    correct = "green"
-    almost = "yellow"
-    empty = ""
-
-
-class Termo():
-    def __init__(self):
-        self.console = Console()
-
-    def _get_random_word(self) -> str:
-        return random.choice(palavras)
-
-    def _is_valid(self, word: str) -> bool:
-        no_accent_word = remove_accents(word).lower().strip()
-        return len(no_accent_word) == 5 and no_accent_word in dicionario
-
-    def get_input_word(self) -> str:
-        while True:
-            word = input("Digite uma palavra: ")
-            if self._is_valid(word):
-                return word
-            elif len(word) != 5:
-                self.console.print("Por favor digite uma palavra com 5 letras!", style="yellow")
-            else:
-                self.console.print("Por favor digite uma palavra existente!", style="yellow")
-
-    def compare_words(self, word):
-
-        result = [LetterPosition.wrong] * 5
-        found_letters_counter = defaultdict(int)
-
-        for idx in range(5):
-            if word[idx] == self.random_word_without_accents[idx]:
-                result[idx] = LetterPosition.correct
-                found_letters_counter[word[idx]] += 1
-
-        for idx in range(5):
-            if word[idx] in self.random_word_without_accents and result[idx] != LetterPosition.correct:
-                if found_letters_counter[word[idx]] < self.random_word_without_accents.count(word[idx]):
-                    result[idx] = LetterPosition.almost
-                    found_letters_counter[word[idx]] += 1
-
-        return result
-
-    def _get_accent_word(self, word):
-        return word
-
- 
-    def get_game_result(self):
-        for _, result in self.board:
-            if all(letter == LetterPosition.correct for letter in result):
-                self.game_is_ended = True
-                self.result = True
-        
-        # self.result = False
-
-
-    def print_board(self, border=""):
-        self.console.rule("TERMO")
-        text = Text()
-        for word, result in self.board:
-            accented_word = self._get_accent_word(word)
-            for idx in range(4):
-                text.append(f"{accented_word[idx]} ", style=result[idx].value)
-            text.append(f"{accented_word[4]}\n", style=result[idx].value)
-        text.rstrip() 
-        self.console.print(Panel.fit(text, border_style=border), justify="center")
-
-    def new_game(self):
-        # self.random_word_without_accents = self._get_random_word()
-        self.random_word = "areal"
-        self.random_word_without_accents = "areal"
-        self.game_is_ended = False
-        self.result = None
-        self.board = [("_____", [LetterPosition.empty]*5)] * 6
-
-    def final(self):
-        with self.console.screen():
-            if self.result:
-                final_txt = Text("Parabéns você ganhou! A palavra era: ")
-                border = "green"
-            else:
-                final_txt = Text("Que pena, você perdeu. A palavra era: ")
-                border = "red"
-            final_txt.append(Text(self.random_word, style="green"))
-            self.print_board(border)
-            self.console.print(final_txt)
-            input()
-
-    def run(self):
-        self.new_game()
-
-        for move in range(6):
-            with self.console.screen():
-                self.print_board()
-
-                word = self.get_input_word()
-                result = self.compare_words(word)
-                self.board[move] = (word, result)
-
-                self.get_game_result()
-                if self.game_is_ended:
-                    break
-
-        self.final()
+from termo import Termo
+from dueto import Dueto
 
 
           
@@ -131,7 +24,7 @@ class Letreco:
     def __init__(self):
         self.console = Console()
         self.termo = Termo()
-        # self.dueto = Dueto()
+        self.dueto = Dueto()
 
     def _gen_menu_group(self, index: int = 0) -> Group:
         menu = Text(justify="left")
@@ -232,8 +125,7 @@ class Letreco:
                 case "termo":
                     self.termo.run()
                 case "dueto":
-                    # self.dueto.run()
-                    ...
+                    self.dueto.run()
 
 
 

@@ -1,7 +1,16 @@
 from unicodedata import normalize
 from sys import exit
+from enum import Enum
 
 import click
+
+
+class LetterPosition(Enum):
+    wrong = "red"
+    correct = "green"
+    almost = "yellow"
+    empty = ""
+
 
 
 def get_click() -> str | None:
