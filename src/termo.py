@@ -10,15 +10,16 @@ from rich.live import Live
 from rich.align import Align
 from rich.columns import Columns
 from rich.rule import Rule
-from rich.traceback import install; install()
+from rich.traceback import install
 
-from palavras import palavras
-from dicionario import dicionario
-from utils import remove_accents, get_click, LetterPosition
+install()
+
+from src.palavras import palavras
+from src.dicionario import dicionario
+from src.utils import remove_accents, get_click, LetterPosition
 
 
-
-class Termo():
+class Termo:
     def __init__(self):
         self.console = Console()
 
@@ -36,23 +37,31 @@ class Termo():
             if self._is_valid(word):
                 return word
             elif len(word) != 5:
-                self.console.print("Por favor digite uma palavra com 5 letras!", style="yellow")
+                self.console.print(
+                    "Por favor digite uma palavra com 5 letras!", style="yellow"
+                )
             else:
-                self.console.print("Por favor digite uma palavra existente!", style="yellow")
+                self.console.print(
+                    "Por favor digite uma palavra existente!", style="yellow"
+                )
 
-    def compare_words(self, word, secret_word):
-
+    def compare_word(self, word) -> list[LetterPosition]:
         result = [LetterPosition.wrong] * 5
         found_letters_counter = defaultdict(int)
 
         for idx in range(5):
-            if word[idx] == secret_word[idx]:
+            if word[idx] == self.secret_word_unaccentuated[idx]:
                 result[idx] = LetterPosition.correct
                 found_letters_counter[word[idx]] += 1
 
         for idx in range(5):
-            if word[idx] in secret_word and result[idx] != LetterPosition.correct:
-                if found_letters_counter[word[idx]] < secret_word.count(word[idx]):
+            if (
+                word[idx] in self.secret_word_unaccentuated
+                and result[idx] != LetterPosition.correct
+            ):
+                if found_letters_counter[
+                    word[idx]
+                ] < self.secret_word_unaccentuated.count(word[idx]):
                     result[idx] = LetterPosition.almost
                     found_letters_counter[word[idx]] += 1
 
@@ -67,7 +76,7 @@ class Termo():
             if all(letter == LetterPosition.correct for letter in result):
                 return True
         return False
-    
+
     @property
     def game_is_over(self):
         if self.winner:
@@ -80,23 +89,23 @@ class Termo():
         self.console.rule("TERMO")
         board = self._get_formated_board(self.board, border)
         self.console.print(board, justify="center")
-        
+
     def _get_formated_board(self, board, border):
         text = Text()
         for word, result in board:
             accented_word = self._get_accent_word(word)
             for idx in range(4):
                 text.append(f"{accented_word[idx]} ", style=result[idx].value)
-            text.append(f"{accented_word[4]}\n", style=result[idx].value)
+            text.append(f"{accented_word[-1]}\n", style=result[-1].value)
         text.rstrip()
         board = Panel.fit(text, border_style=border)
-        
+
         return board
 
     def new_game(self):
         self.secret_word = self._get_random_word()
         self.secret_word_unaccentuated = remove_accents(self.secret_word)
-        self.board = [("_____", [LetterPosition.empty]*5)] * 6
+        self.board = [("_____", [LetterPosition.empty] * 5)] * 6
 
     def end(self):
         with self.console.screen():
@@ -119,11 +128,10 @@ class Termo():
                 self.print_board()
 
                 word = self.get_input_word()
-                result = self.compare_words(word, self.secret_word_unaccentuated)
+                result = self.compare_word(word)
                 self.board[move] = (word, result)
 
                 if self.game_is_over:
                     break
 
         self.end()
-
