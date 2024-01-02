@@ -1,12 +1,12 @@
 import random
 from collections import defaultdict
 
-from tinydb import TinyDB, Query
-from rich.text import Text
-from rich.panel import Panel
 from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+from tinydb import Query, TinyDB
 
-from src.utils import remove_accents, LetterPosition
+from src.utils import LetterPosition, remove_accents
 
 
 class Termo:
@@ -21,7 +21,9 @@ class Termo:
 
     def _is_valid(self, word: str) -> bool:
         no_accent_word = remove_accents(word).lower().strip()
-        return len(no_accent_word) == 5 and self.db.table("words").search(Query()[no_accent_word].exists())
+        return len(no_accent_word) == 5 and self.db.table("words").search(
+            Query()[no_accent_word].exists()
+        )
 
     def get_input_word(self) -> str:
         while True:
@@ -109,7 +111,7 @@ class Termo:
             final_txt.append(Text(self.secret_word, style="green"))
             self.print_board(border)
             self.console.print(final_txt)
-            input() # wait for enter
+            input()  # wait for enter
 
     def run(self):
         self.new_game()

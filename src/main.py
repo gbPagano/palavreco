@@ -1,11 +1,11 @@
 from rich import print
-from rich.text import Text
 from rich.console import Console
 from rich.rule import Rule
+from rich.text import Text
 from rich_menu import Menu
 
-from termo import Termo
-from dueto import Dueto
+from src.dueto import Dueto
+from src.termo import Termo
 
 
 class Letreco:
@@ -13,7 +13,12 @@ class Letreco:
         self.console = Console()
         self.termo = Termo()
         self.dueto = Dueto()
-        self.main_menu = Menu("Termo", "Dueto", "Tutorial", rule_title="Letreco")
+        self.main_menu = Menu(
+            "Termo",
+            "Dueto",
+            "Tutorial",
+            rule_title="Letreco",
+        )
 
     def tutorial(self):
         with self.console.screen():

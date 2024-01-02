@@ -1,6 +1,6 @@
-from unicodedata import normalize
-from sys import exit
 from enum import Enum
+from sys import exit
+from unicodedata import normalize
 
 import click
 
@@ -10,7 +10,6 @@ class LetterPosition(Enum):
     correct = "green"
     almost = "yellow"
     empty = ""
-
 
 
 def get_click() -> str | None:
@@ -30,5 +29,6 @@ def get_click() -> str | None:
         case _:
             return None
 
+
 def remove_accents(word: str) -> str:
-    return normalize("NFKD", word).encode("ASCII","ignore").decode("ASCII")
+    return normalize("NFKD", word).encode("ASCII", "ignore").decode("ASCII")
