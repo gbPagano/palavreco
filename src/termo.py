@@ -1,49 +1,44 @@
 import random
-from enum import Enum
 from collections import defaultdict
 
-from rich import print
+from tinydb import TinyDB, Query
 from rich.text import Text
 from rich.panel import Panel
-from rich.console import Console, Group
-from rich.live import Live
-from rich.align import Align
-from rich.columns import Columns
-from rich.rule import Rule
-from rich.traceback import install
+from rich.console import Console
 
-install()
-
-from src.palavras import palavras
-from src.dicionario import dicionario
-from src.utils import remove_accents, get_click, LetterPosition
+from src.utils import remove_accents, LetterPosition
 
 
 class Termo:
-    def __init__(self):
+    def __init__(self, size: int = 6):
         self.console = Console()
+        self.size = size
+        self.db = TinyDB("db.json")
 
     def _get_random_word(self) -> str:
         return "areal"
-        return random.choice(palavras)
+        return random.choice(self.db.table("initial_words").all())["word"]
 
     def _is_valid(self, word: str) -> bool:
         no_accent_word = remove_accents(word).lower().strip()
-        return len(no_accent_word) == 5 and no_accent_word in dicionario
+        return len(no_accent_word) == 5 and self.db.table("words").search(Query()[no_accent_word].exists())
 
     def get_input_word(self) -> str:
         while True:
-            word = input("Digite uma palavra: ")
-            if self._is_valid(word):
-                return word
-            elif len(word) != 5:
-                self.console.print(
-                    "Por favor digite uma palavra com 5 letras!", style="yellow"
-                )
-            else:
-                self.console.print(
-                    "Por favor digite uma palavra existente!", style="yellow"
-                )
+            try:
+                word = input("Digite uma palavra: ")
+                if self._is_valid(word):
+                    return word
+                elif len(word) != 5:
+                    self.console.print(
+                        "Por favor digite uma palavra com 5 letras!", style="yellow"
+                    )
+                else:
+                    self.console.print(
+                        "Por favor digite uma palavra existente!", style="yellow"
+                    )
+            except KeyboardInterrupt:
+                exit()
 
     def compare_word(self, word) -> list[LetterPosition]:
         result = [LetterPosition.wrong] * 5
@@ -79,11 +74,7 @@ class Termo:
 
     @property
     def game_is_over(self):
-        if self.winner:
-            return True
-        elif self.board[-1][0] != "_____":
-            return True
-        return False
+        return self.winner or self.board[-1][0] != "_____"
 
     def print_board(self, border=""):
         self.console.rule("TERMO")
@@ -105,7 +96,7 @@ class Termo:
     def new_game(self):
         self.secret_word = self._get_random_word()
         self.secret_word_unaccentuated = remove_accents(self.secret_word)
-        self.board = [("_____", [LetterPosition.empty] * 5)] * 6
+        self.board = [("_____", [LetterPosition.empty] * 5)] * self.size
 
     def end(self):
         with self.console.screen():
@@ -118,12 +109,11 @@ class Termo:
             final_txt.append(Text(self.secret_word, style="green"))
             self.print_board(border)
             self.console.print(final_txt)
-            input()
+            input() # wait for enter
 
     def run(self):
         self.new_game()
-
-        for move in range(6):
+        for move in range(self.size):
             with self.console.screen():
                 self.print_board()
 
@@ -133,5 +123,4 @@ class Termo:
 
                 if self.game_is_over:
                     break
-
         self.end()
