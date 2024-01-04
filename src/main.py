@@ -1,4 +1,3 @@
-from rich import print
 from rich.console import Console
 from rich.rule import Rule
 from rich.text import Text
@@ -63,13 +62,17 @@ class Letreco:
             input()
 
     def run(self):
-        match self.main_menu.ask():
-            case "Termo":
-                self.termo.run()
-            case "Termo":
-                print("implementar")
-            case "Tutorial":
-                self.tutorial()
+        while True:
+            try:
+                match self.main_menu.ask():
+                    case "Termo":
+                        self.termo.run()
+                    case "Dueto":
+                        self.dueto.run()
+                    case "Tutorial":
+                        self.tutorial()
+            except KeyboardInterrupt:
+                exit()
 
 
 if __name__ == "__main__":

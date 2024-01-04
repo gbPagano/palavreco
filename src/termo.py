@@ -16,7 +16,7 @@ class Termo:
         self.db = TinyDB("db.json")
 
     def _get_random_word(self) -> str:
-        return "areal"
+        # return "areal"
         return random.choice(self.db.table("initial_words").all())["word"]
 
     def _is_valid(self, word: str) -> bool:
@@ -65,7 +65,10 @@ class Termo:
         return result
 
     def _get_accent_word(self, word):
-        return word
+        if word == "_____":
+            return word
+        word = remove_accents(word)
+        return self.db.table("words").search(Query()[word].exists())[0][word]
 
     @property
     def winner(self):
@@ -111,7 +114,10 @@ class Termo:
             final_txt.append(Text(self.secret_word, style="green"))
             self.print_board(border)
             self.console.print(final_txt)
-            input()  # wait for enter
+            try:
+                input()  # wait for enter
+            except KeyboardInterrupt:
+                exit()
 
     def run(self):
         self.new_game()
