@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "palavreco"
-version = "0.1.1"
+version = "0.1.2"
 description = "Palavreco é um jogo para terminal baseado no Wordle, Termo e Letreco."
 authors = ["gbPagano <guilhermebpagano@gmail.com>"]
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{include = "palavreco"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -14,7 +14,7 @@ rich-menu = "^0.1.3"
 tinydb = "^4.8.0"
 
 [tool.poetry.scripts]
-palavreco = "src.main:main"
+palavreco = "palavreco.main:main"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.12.0"
@@ -27,6 +27,6 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
-run = "python src/main.py"
+run = "python palavreco/main.py"
 test = "pytest -vv"
-format = "isort src && isort tests && ruff format src && ruff format tests"
+format = "isort palavreco && isort tests && ruff format palavreco && ruff format tests"
