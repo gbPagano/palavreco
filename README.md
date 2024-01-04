@@ -32,37 +32,18 @@ As palavras podem possuir letras repetidas.
 Ao observar as cores das letras você pode verificar se uma mesma letra se repete na palavra ou não.
 
 Os acentos são preenchidos automaticamente e não são considerados nas dicas.
-<div align="center">
+
+<div style="text-align: center;">
 
 ![menu](./assets/menu.png)
 
-</div>
-
-<div align="center">
-
 ![termo_1](./assets/termo_1.png)
-
-</div>
-
-<div align="center">
 
 ![termo_2](./assets/termo_2.png)
 
-</div>
-
-<div align="center">
-
 ![dueto_1](./assets/dueto_1.png)
 
-</div>
-
-<div align="center">
-
 ![dueto_2](./assets/dueto_2.png)
-
-</div>
-
-<div align="center">
 
 ![dueto_3](./assets/dueto_3.png)
 
