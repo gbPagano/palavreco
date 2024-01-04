@@ -32,15 +32,41 @@ As palavras podem possuir letras repetidas.
 Ao observar as cores das letras você pode verificar se uma mesma letra se repete na palavra ou não.
 
 Os acentos são preenchidos automaticamente e não são considerados nas dicas.
+<div align="center">
 
 ![menu](./assets/menu.png)
 
+</div>
+
+<div align="center">
+
 ![termo_1](./assets/termo_1.png)
+
+</div>
+
+<div align="center">
+
 ![termo_2](./assets/termo_2.png)
 
+</div>
+
+<div align="center">
+
 ![dueto_1](./assets/dueto_1.png)
+
+</div>
+
+<div align="center">
+
 ![dueto_2](./assets/dueto_2.png)
+
+</div>
+
+<div align="center">
+
 ![dueto_3](./assets/dueto_3.png)
+
+</div>
 
 ## Como funciona
 As palavras selecionadas para as partidas foram escolhidas manualmente por mim e colocadas em uma lista no python. A cada início de partida uma nova palavra é escolhida aleatoriamente a partir dessa lista.
