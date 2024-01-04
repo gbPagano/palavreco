@@ -1,24 +1,20 @@
-# Wordle Game for Terminal
-## Introdução
-### Este é um jogo para terminal baseado no [Wordle][link-wordle], [Termo][link-termo] e [Letreco][link-letreco].
-> O programa e o código fonte estão em português
-## Requisitos
-* Ter o Python instalado na versão 3.10.4 (durante o desenvolvimento, utilizei a versão 3.10.4, então não garanto que versões anteriores funcionem);
-    * Ter as seguintes bibliotecas no Python:
-        * Unidecode==1.3.4
-* O programa não funciona bem no Windows 7 ou inferior.
-## Como utilizar
-### Instalando as bibliotecas necessárias
-```bash
-$ git clone https://github.com/gbPagano/wordle-game-for-terminal
-$ cd wordle-game-for-terminal
-$ pip install -r requirements.txt
+# Letreco CLI
+ Este é um jogo para terminal baseado no [Wordle][link-wordle], [Termo][link-termo] e [Letreco][link-letreco].
+
+## Instalação
+Instale com pip ou seu gerenciador de pacotes PyPI favorito.
+```sh
+pip install letreco # not implemented
 ```
-### Executando o jogo
-```bash
-$ python letreco.py
+
+## Executando o jogo
+Execute o seguinte comando no seu terminal:
+```sh
+letreco # not implemented
 ```
+
 ---
+
 No **Termo** você deve acertar uma palavra em **6** tentativas. No **Dueto** são duas palavras em **7** tentativas.
 
 A palavra sempre terá 5 letras, e será gerada de forma aleatória a partir de uma lista preestabelecida.
@@ -39,13 +35,13 @@ Os acentos são preenchidos automaticamente e não são considerados nas dicas.
 
 ![menu](./assets/menu.png)
 
-Exemplo no modo termo:
+![termo_1](./assets/termo_1.png)
+![termo_2](./assets/termo_2.png)
 
-![termo](./assets/termo.png)
+![dueto_1](./assets/dueto_1.png)
+![dueto_2](./assets/dueto_2.png)
+![dueto_3](./assets/dueto_3.png)
 
-Exemplo no modo dueto:
-
-![dueto](./assets/dueto.png)
 ## Como funciona
 As palavras selecionadas para as partidas foram escolhidas manualmente por mim e colocadas em uma lista no python. A cada início de partida uma nova palavra é escolhida aleatoriamente a partir dessa lista.
 

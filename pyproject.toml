@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "wordle-game-for-terminal"
+version = "0.1.0"
+description = ""
+authors = ["gbPagano <guilhermebpagano@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+textual = "^0.35.1"
+rich = "^13.5.2"
+rich-menu = "^0.1.3"
+tinydb = "^4.8.0"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.12.0"
+taskipy = "^1.12.2"
+ruff = "^0.1.9"
+pytest = "^7.4.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+run = "python src/main.py"
+test = "pytest -vv"
+format = "isort src && isort tests && ruff format src && ruff format tests"
