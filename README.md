@@ -43,9 +43,9 @@ Os acentos são preenchidos automaticamente e não são considerados nas dicas.
 ![dueto_3](./assets/dueto_3.png)
 
 ## Como funciona
-As palavras selecionadas para as partidas foram escolhidas manualmente por mim e colocadas em uma lista no python. A cada início de partida uma nova palavra é escolhida aleatoriamente a partir dessa lista.
+As palavras selecionadas para as partidas foram escolhidas manualmente por mim, e em cada início de partida uma nova palavra é escolhida aleatoriamente.
 
-Para verificar se a palavra existe ou não, filtrei uma lista publica de palavras que pode ser encontrada [aqui][link-palavras], e coloquei essas palavras em um dicionário no python, com cada palavra acentuada e desacentuada.
+Para verificar se a palavra existe ou não, filtrei uma lista publica de palavras que pode ser encontrada [aqui][link-palavras], e coloquei essas palavras em um database, com cada palavra acentuada e desacentuada.
 
 Para verificar a existência de cada palavra realizei requests no [dicio.com][link-dicio], onde fiz um script em python para automatizar o processo.
 
