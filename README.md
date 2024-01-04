@@ -33,7 +33,7 @@ Ao observar as cores das letras você pode verificar se uma mesma letra se repet
 
 Os acentos são preenchidos automaticamente e não são considerados nas dicas.
 
-<div style="text-align: center;">
+<div align="center">
 
 ![menu](./assets/menu.png)
 
