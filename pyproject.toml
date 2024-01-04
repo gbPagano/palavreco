@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wordle-game-for-terminal"
+name = "palavreco"
 version = "0.1.0"
 description = ""
 authors = ["gbPagano <guilhermebpagano@gmail.com>"]

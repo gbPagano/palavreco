@@ -7,7 +7,7 @@ from src.dueto import Dueto
 from src.termo import Termo
 
 
-class Letreco:
+class Palavreco:
     def __init__(self):
         self.console = Console()
         self.termo = Termo()
@@ -16,7 +16,7 @@ class Letreco:
             "Termo",
             "Dueto",
             "Tutorial",
-            rule_title="Letreco",
+            rule_title="Palavreco",
         )
 
     def tutorial(self):
@@ -76,5 +76,5 @@ class Letreco:
 
 
 if __name__ == "__main__":
-    app = Letreco()
+    app = Palavreco()
     app.run()

@@ -1,16 +1,16 @@
-# Letreco CLI
- Este é um jogo para terminal baseado no [Wordle][link-wordle], [Termo][link-termo] e [Letreco][link-letreco].
+# Palavreco
+Este é um jogo para terminal baseado no [Wordle][link-wordle], [Termo][link-termo] e [Letreco][link-letreco].
 
 ## Instalação
 Instale com pip ou seu gerenciador de pacotes PyPI favorito.
 ```sh
-pip install letreco # not implemented
+pip install palavreco
 ```
 
 ## Executando o jogo
 Execute o seguinte comando no seu terminal:
 ```sh
-letreco # not implemented
+palavreco
 ```
 
 ---
