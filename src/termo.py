@@ -39,7 +39,7 @@ class Termo:
                     self.console.print(
                         "Por favor digite uma palavra existente!", style="yellow"
                     )
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, EOFError):
                 exit()
 
     def compare_word(self, word) -> list[LetterPosition]:
@@ -116,7 +116,7 @@ class Termo:
             self.console.print(final_txt)
             try:
                 input()  # wait for enter
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, EOFError):
                 exit()
 
     def run(self):

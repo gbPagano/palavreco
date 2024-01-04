@@ -57,7 +57,7 @@ class Dueto(Termo):
             self.console.print(final_txt)
             try:
                 input()  # wait for enter
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, EOFError):
                 exit()
 
     def run(self):

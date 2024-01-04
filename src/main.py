@@ -71,7 +71,7 @@ class Letreco:
                         self.dueto.run()
                     case "Tutorial":
                         self.tutorial()
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, EOFError):
                 exit()
 
 
