@@ -3,8 +3,8 @@ from rich.rule import Rule
 from rich.text import Text
 from rich_menu import Menu
 
-from src.dueto import Dueto
-from src.termo import Termo
+from palavreco.dueto import Dueto
+from palavreco.termo import Termo
 
 
 class Palavreco:

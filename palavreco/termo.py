@@ -1,22 +1,22 @@
 import random
 from collections import defaultdict
+from pathlib import Path
 
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 from tinydb import Query, TinyDB
 
-from src.utils import LetterPosition, remove_accents
+from palavreco.utils import LetterPosition, remove_accents
 
 
 class Termo:
     def __init__(self, size: int = 6):
         self.console = Console()
         self.size = size
-        self.db = TinyDB("db.json")
+        self.db = TinyDB(Path(__file__).resolve().parent / "db.json")
 
     def _get_random_word(self) -> str:
-        # return "areal"
         return random.choice(self.db.table("initial_words").all())["word"]
 
     def _is_valid(self, word: str) -> bool:

@@ -1,7 +1,7 @@
 from rich.columns import Columns
 from rich.text import Text
 
-from src.termo import Termo
+from palavreco.termo import Termo
 
 
 class Dueto(Termo):
