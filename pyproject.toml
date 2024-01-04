@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "palavreco"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "Palavreco é um jogo para terminal baseado no Wordle, Termo e Letreco."
 authors = ["gbPagano <guilhermebpagano@gmail.com>"]
 readme = "README.md"
 packages = [{include = "src"}]
@@ -13,6 +13,8 @@ rich = "^13.5.2"
 rich-menu = "^0.1.3"
 tinydb = "^4.8.0"
 
+[tool.poetry.scripts]
+palavreco = "src.main:main"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.12.0"

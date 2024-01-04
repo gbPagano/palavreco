@@ -75,6 +75,10 @@ class Palavreco:
                 exit()
 
 
-if __name__ == "__main__":
+def main():
     app = Palavreco()
     app.run()
+
+
+if __name__ == "__main__":
+    main()

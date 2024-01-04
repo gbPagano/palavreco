@@ -41,7 +41,7 @@ class Dueto(Termo):
             border_b = "green"
         elif self.termo_b.game_is_over:
             border_b = "red"
-        
+
         return border_a, border_b
 
     def end(self):
